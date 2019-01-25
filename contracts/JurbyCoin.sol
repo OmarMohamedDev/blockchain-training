@@ -13,6 +13,8 @@ contract JurbyCoin {
 
     function donate() payable public {}
 
+    function sell() payable public {}
+
     function buy() payable public {
         CEO.transfer(msg.value / 2);
         CTO.transfer(msg.value / 4);

@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>My Title</title>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@v1.0.0-beta.36/dist/web3.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/vrde/web3-browser-loader@9cbb4d09760884ec343d7dc8b7e1813652f2418b/index.js"></script>
+        <script>
+            async function boot() {
+                const web3 = await loadWeb3();
+                const networkId = await web3.eth.net.getId();
+                console.log("Network Id", networkId)
+                const contractMetadata = await $.getJSON(
+                    "../build/contracts/SimpleToken.json"
+                );
+                console.log(contractMetadata.networks);
+
+                const contract = new web3.eth.Contract(
+                    contractMetadata.abi,
+                    contractMetadata.networks[networkId].address
+                );
+
+                window.c = contract;
+                render(web3, contract);
+            }
+
+            async function render(web3, contract) {
+                const name = await contract.methods.getName().call();
+                $("#name").text(name);
+            }
+
+            boot()
+        </script>
+    </head>
+    <body>
+    <h1>
+        Welcome to <em id="name"></em>!
+    </h1>
+    </body>
+</html>
