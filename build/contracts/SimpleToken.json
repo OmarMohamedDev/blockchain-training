@@ -1960,10 +1960,16 @@
       "links": {},
       "address": "0x57A49050b20A9f24210AC6D4f466571449b1aEE1",
       "transactionHash": "0xbac26987f02e42b341b85a4c60981af39cbc006d4cc1ec2550be0a4f2955acd3"
+    },
+    "1548410923025": {
+      "events": {},
+      "links": {},
+      "address": "0xA2BB15170adfD2C8a494CDCE875B7709d3167D07",
+      "transactionHash": "0xcf48b1e139d161ae3d0fda691a874058ec11c232ebf5e1e6f117e65e50d30069"
     }
   },
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-01-25T09:36:39.266Z",
+  "updatedAt": "2019-01-25T10:09:50.511Z",
   "devdoc": {
     "methods": {}
   },

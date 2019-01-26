@@ -26,7 +26,26 @@
 
             async function render(web3, contract) {
                 const name = await contract.methods.getName().call();
+                const address = (await web3.eth.getAccounts())[0];
+                const balance = (await  contract.methods.getBalanceOf(address).call());
+
+                $("#send").on("click", async function(e) {
+                    const to = $("#to").val();
+                    const amount = parseInt($("#amount").val(),10);
+                    console.log(to,amount);
+                    try {
+                        const result = await contract.methods.transfer(to, amount).send({
+                         from: address
+                        });
+                    } catch(err) {
+                      console.error(err);
+                    }
+                });
                 $("#name").text(name);
+                $("#address").text(address);
+                $("#balance").text(balance);
+
+                contract.events.Transfer((err, event) => console.log(err, event));
             }
 
             boot()
@@ -34,7 +53,11 @@
     </head>
     <body>
     <h1>
-        Welcome to <em id="name"></em>!
+        Welcome to <em id="name"></em>!<br />
+        Your address is <em id="address"></em><br />
+        Your balance is <em id="balance"></em>
+
+        Transfer <input id="amount"> to <input id="address"> <button title="send" id="send"></button>
     </h1>
     </body>
 </html>
